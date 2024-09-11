@@ -1,5 +1,22 @@
+table{
+  border-style: solid;
+  
+}
+
+tr{
+  border-style: solid;
+}
+
+td{
+  border-style: solid;
+  height: 200px;
+  width:  200px;
+  text-align: center;
+  
+}
 .App {
   text-align: center;
+  background-color: black;
 }
 
 .App-logo {
