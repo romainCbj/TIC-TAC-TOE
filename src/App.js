@@ -12,6 +12,7 @@ export default function App() {
     [0, 0, 0],
     [0, 0, 0],
   ])
+  const [winner, setWinner] = useState ("");
 
   const [mat, setMat] = useState();
 
@@ -40,28 +41,57 @@ const GenerateMatrice = () => {
   React.useEffect(() => {
     GenerateMatrice();
 
-  },[])
+  },[matrice])
 
 
 function RemplirCase(i,j){
-  
   const _newMatrice = [...matrice];
   if(tourJoueur == true){
     _newMatrice[i][j] = 1;
   }
-else{
-  _newMatrice[i][j] = -1;
-
-}
-
+  else{
+    _newMatrice[i][j] = -1;
+  }
   setMatrice (_newMatrice);
   GenerateMatrice();
+  VerifWinner();
   setTourJoueur(!tourJoueur);
-  
-
-  
 }
 
+function VerifWinner(){
+  for(let i = 0; i < 3; i++) {
+    let somme = 0;
+    for(let j = 0; j < 3; j++){
+      somme += matrice[i][j];
+      VerifSomme(somme)
+    }
+  }
+
+  for(let i = 0; i < 3; i++) {
+    let somme = 0;
+    for(let j = 0; j < 3; j++){
+      somme += matrice[j][i];
+      VerifSomme(somme)
+    }
+  }
+
+}
+
+function VerifSomme(somme){
+  if(somme == 3){
+    console.log("test X")
+    setWinner("X");
+    alert("Winner is " + winner)
+    return
+  }
+  else if(somme == -3){
+    console.log("test O")
+    setWinner("O");
+    alert("Winner is " + winner)
+    return
+  }
+  console.log(winner);
+}
 
   return (
     <div> 
