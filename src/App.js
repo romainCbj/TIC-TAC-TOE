@@ -6,7 +6,6 @@ export default function App() {
   //Si true c'est à X 
   //Si false c'est à O
   const [tourJoueur, setTourJoueur] = useState(true);
-  const [test, setTest] = useState("bite")
   const [matrice, setMatrice] = useState ([
     [0, 0, 0],
     [0, 0, 0],
@@ -22,6 +21,7 @@ const tdContent = (x) => {
   if (x== 1) return "X";
   if (x== -1) return "O";
 }
+
 
 const GenerateMatrice = () => {
   const lignes = [];
@@ -74,6 +74,9 @@ function VerifWinner(){
       VerifSomme(somme)
     }
   }
+  //Diagonales
+  VerifSomme(matrice[0][0] + matrice[1][1] + matrice[2][2])
+  VerifSomme(matrice[2][0] + matrice[1][1] + matrice[0][2])
 
 }
 
@@ -91,6 +94,10 @@ function VerifSomme(somme){
     return
   }
   console.log(winner);
+}
+
+function Reset (){
+  
 }
 
   return (
