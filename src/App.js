@@ -11,10 +11,16 @@ export default function App() {
     [0, 0, 0],
     [0, 0, 0],
   ])
-  const [winner, setWinner] = useState ("0");
+  const [winner, setWinner] = useState ("");
 
   const [mat, setMat] = useState();
+  const [scoreX, setScoreX] = useState(0);
+  const [scoreO, setScoreO] = useState(0);
 
+const tourContent = (value) => {
+  if(value === true) return "X"
+  if(value === false) return "O"
+}
 
 const tdContent = (x) => {
   if (x== 0) return "";
@@ -54,10 +60,16 @@ function RemplirCase(i,j){
   setMatrice (_newMatrice);
   GenerateMatrice();
   VerifWinner();
-  if(winner != "0"){
+  if(winner != ""){
     alert("Winner is " + winner)
+    if(winner == "X") {
+      setScoreX(scoreX +1);
+    }
+    else if(winner == "O"){
+      setScoreO(scoreO +1);
+    }
     Reset();
-    
+    setWinner("");
   }
   setTourJoueur(!tourJoueur);
 }
@@ -88,6 +100,7 @@ function VerifSomme(somme){
   if(somme == 3){
     console.log("test X")
     setWinner("X");
+    console.log(winner);
     return
   }
   else if(somme == -3){
@@ -111,14 +124,24 @@ function Reset (){
 }
 
   return (
-    <div> 
-      <h2> Tour joueur </h2>
-      <table>
-      {mat}
-      </table>
-     <button name='reste' onClick={Reset}>Reset</button>
-     
+    <div > 
+      <div class ="Game"> 
+      
+        <table>
+        {mat}
+        </table>
+       
+      </div>
+    
+     <div class = "infos">
+     <h2> C'est à {tourContent(tourJoueur)} de jouer</h2>
+        <h2>Score </h2>
+        <h3>X : {scoreX}</h3>
+        <h3>0 : {scoreO}</h3>
+        <button name='reste' onClick={Reset}>Reset</button>
+     </div>
     </div>
+
   );
 
 };
