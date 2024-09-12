@@ -11,7 +11,7 @@ export default function App() {
     [0, 0, 0],
     [0, 0, 0],
   ])
-  const [winner, setWinner] = useState ("");
+  const [winner, setWinner] = useState ("0");
 
   const [mat, setMat] = useState();
 
@@ -43,7 +43,6 @@ const GenerateMatrice = () => {
 
   },[matrice])
 
-
 function RemplirCase(i,j){
   const _newMatrice = [...matrice];
   if(tourJoueur == true){
@@ -55,6 +54,11 @@ function RemplirCase(i,j){
   setMatrice (_newMatrice);
   GenerateMatrice();
   VerifWinner();
+  if(winner != "0"){
+    alert("Winner is " + winner)
+    Reset();
+    
+  }
   setTourJoueur(!tourJoueur);
 }
 
@@ -84,20 +88,26 @@ function VerifSomme(somme){
   if(somme == 3){
     console.log("test X")
     setWinner("X");
-    alert("Winner is " + winner)
     return
   }
   else if(somme == -3){
     console.log("test O")
     setWinner("O");
-    alert("Winner is " + winner)
     return
   }
   console.log(winner);
 }
 
 function Reset (){
-  
+  const _newMatrice = [...matrice];
+  for(let i = 0; i < 3; i++) {
+    for(let j = 0; j < 3; j++){
+      _newMatrice[i][j] = 0
+    }
+  }
+  setMatrice (_newMatrice);
+  GenerateMatrice();
+
 }
 
   return (
@@ -106,7 +116,7 @@ function Reset (){
       <table>
       {mat}
       </table>
-     
+     <button name='reste' onClick={Reset}>Reset</button>
      
     </div>
   );
